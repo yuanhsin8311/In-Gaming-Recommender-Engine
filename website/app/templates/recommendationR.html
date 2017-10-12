@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="h1">
+  <h1>What will be Next?</h1>
+  </div>  
+
+
+    <div class="container">
+      <h2><strong>User ID:</strong> {{user_id}}</h2>
+    </div>  
+
+
+
+      <h2><strong>Game Recommendation:</strong> <h2>
+     <h2>
+      <ul>
+        {% for i in lst_recommended_games %}
+        <img src={{i[2]}}>
+        <li>{{"Game Name: " + i[0]}}  
+            <br>
+            Price: {{ i[1]}} 
+            <br> 
+              </li>
+        
+       
+        
+        {% endfor %}
+      </ul>
+    </h2>
+
+    </div>
+      
+
+
+{% endblock %}
+
