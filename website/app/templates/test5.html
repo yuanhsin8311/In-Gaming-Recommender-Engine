@@ -1,0 +1,107 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+<!--javascript for charts
+  -->
+<script>
+$(function () {
+$('#chart_container').highcharts({
+
+    chart: {
+        type: 'scatter',
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'K-Clustering for different Pricing Tiers and Reviews '
+    },
+    xAxis: {
+        title: {
+            enabled: true,
+            text: 'Initial Price'
+        },
+        startOnTick: true,
+        endOnTick: true,
+        showLastLabel: true
+    },
+    yAxis: {
+        title: {
+            text: 'Reviews Score'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 100,
+        y: 70,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+        borderWidth: 1
+    },
+    plotOptions: {
+        scatter: {
+            marker: {
+                radius: 5,
+                states: {
+                    hover: {
+                        enabled: true,
+                        lineColor: 'rgb(100,100,100)'
+                    }
+                }
+            },
+            states: {
+                hover: {
+                    marker: {
+                        enabled: false
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x}, {point.y}'
+            }
+        }
+    },
+    series: [{
+        name: 'G0',
+        color: 'rgba(223, 83, 83, .5)',
+        data: [
+        {{result_entry.g0_list_text}}
+            ]
+
+    }, {
+        name: 'G1',
+        color: 'rgba(0,128,0, .5)',
+        data: [
+        {{result_entry.g1_list_text}}
+            ]
+    }, {
+        name: 'G2',
+        color: 'rgba(19, 202, 231, .5)',
+        data: [
+        {{result_entry.g2_list_text}}
+            ]
+    }]
+
+});
+});
+
+
+</script>
+
+
+</head>
+<body>
+  
+  <div id="chart_container" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+  
+</body>
+</html>
+
+

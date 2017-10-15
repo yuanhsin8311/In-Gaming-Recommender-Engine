@@ -1,28 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="h1">
-  <h1>What will be Next?</h1>
+  
+  <div class="container" style="text-align:left">
+      <h2> Welcome! Game Fans <i><font color="green">{{user_id}}</font></i> </h2> 
   </div>  
 
-
-    <div class="container">
-      <h2><strong>User ID:</strong> {{user_id}}</h2>
-    </div>  
-
-
-
-      <h2><strong>Game Recommendation:</strong> <h2>
+  <div class="game" style="text-align:left">
+  <h2> Try Next Games:</h2>
+  </div> 
+     
      <h2>
       <ul>
         {% for i in lst_recommended_games %}
-        <img src={{i[2]}}>
-        <li>{{"Game Name: " + i[0]}}  
-            <br>
-            Price: {{ i[1]}} 
-            <br> 
-              </li>
-        
+        <img src={{i[2]}} class="inner">
+
+        <li class="inner"> <font color="black">{{i[0]}} </font> 
        
+        <br> <font color="black"> ${{i[1]}} </font>  
+
+        <br>
+
+        <button type="button" class="button12">Purchase</button>
+
+        </li> 
+
+        <br> <br>
+
         
         {% endfor %}
       </ul>

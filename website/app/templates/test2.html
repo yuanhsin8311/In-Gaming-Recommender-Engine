@@ -1,0 +1,153 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+<!--javascript for charts
+  -->
+<script>
+$(function () {
+$('#chart_container').highcharts({
+
+chart: {
+type: 'boxplot'
+},
+
+title: {
+text: 'Outlier Exploration'
+},
+
+legend: {
+enabled: false
+},
+        
+xAxis: {
+categories: ['free', 'mass', 'masstige', 'uncertain'],
+title: {
+text: 'Pricing Tier'
+}
+},
+
+yAxis: {
+title: {
+text: 'Review Score'
+},
+plotLines: [{
+value: {{result_entry.mean_value}},
+color: 'red',
+width: 1,
+label: {
+text: 'Mean: {{result_entry.mean_value}}',
+align: 'center',
+style: {
+color: 'gray'
+}
+}
+}]  
+},
+
+
+
+series: [{
+                name: 'Pricing Tier',
+                data: [
+{{result_entry.recommend_list_text}}
+                ],
+                tooltip: {
+                    headerFormat: '<em>Pricing Tier {point.key}</em><br/>'
+                }
+}, {
+
+        name: 'Outlier',
+        color: Highcharts.getOptions().colors[0],
+        type: 'scatter',
+        data: [ // x, y positions where 0 is the first category
+              {{result_entry.outputlier_list_text}}
+        ],
+                marker: {
+                    fillColor: 'white',
+                    lineWidth: 1,
+                    lineColor: Highcharts.getOptions().colors[0]
+                },
+                tooltip: {
+                    pointFormat: 'Review Score: {point.y}'
+                }
+            }]
+
+
+});
+});
+
+$(function () {
+$('#chart_container_no_outlier').highcharts({
+
+chart: {
+type: 'boxplot'
+},
+
+title: {
+text: 'Recommendation scores distribution of different pricing tier'
+},
+
+legend: {
+enabled: false
+},
+        
+xAxis: {
+categories: ['free', 'mass', 'masstige', 'uncertain'],
+title: {
+text: 'Pricing Tier'
+}
+},
+
+yAxis: {
+title: {
+text: 'Review Score'
+},
+plotLines: [{
+value: {{result_entry.mean_value}},
+color: 'red',
+width: 1,
+label: {
+text: 'Mean: {{result_entry.mean_value}}',
+align: 'center',
+style: {
+color: 'gray'
+}
+}
+}]  
+},
+
+
+series: [{
+                name: 'Pricing Tier',
+                data: [
+{{result_entry.recommend_list_text}}
+                ],
+                tooltip: {
+                    headerFormat: '<em>Pricing Tier {point.key}</em><br/>'
+                }
+}]
+
+
+});
+});
+
+</script>
+
+
+</head>
+<body>
+  <li class="active"><a href="/barchart">Bar Chart</a></li>
+  <li class="active"><a href="/my_kmean">K-means</a></li>
+  <div id="chart_container_no_outlier" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+  <div id="chart_container" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+  
+</body>
+</html>
+
+

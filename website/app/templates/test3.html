@@ -1,0 +1,143 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+<!--javascript for charts
+  -->
+<script>
+$(function () {
+$('#chart_container').highcharts({
+
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Most Downloaded Games Rank'
+    },
+    xAxis: {
+        categories: [
+        {% for name in result_entry.name_list %}
+        '{{name}}',
+        {% endfor %}
+        ],
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Download Times',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'App Name',
+        data: [{{result_entry.value_list_text}}]
+    }]
+
+});
+});
+
+
+$(function () {
+$('#chart_container_play').highcharts({
+
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Most Engaged Games Rank'
+    },
+    xAxis: {
+        categories: [
+        {% for name in result_entry.play_name_list %}
+        '{{name}}',
+        {% endfor %}
+        ],
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'PlayTimes',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Game',
+        data: [{{result_entry.play_value_list_text}}]
+    }]
+
+});
+});
+
+
+</script>
+
+
+</head>
+<body>
+  
+  <div id="chart_container" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+  <div id="chart_container_play" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+  
+</body>
+</html>
+
+
